@@ -2,26 +2,13 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "GoogleSheetData", menuName = "Scriptable Objects/GoogleSheetData")]
-public class GoogleSheetData : ScriptableObject
-{
-    public List<GoogleSheetEntry> m_entryData;
-
-    public GoogleSheetData()
-    {
-        m_entryData = new List<GoogleSheetEntry>();
-    }
-}
-
 [Serializable]
-public struct GoogleSheetEntry
+public class GoogleSheetEntry : GoogleDataEntry
 {
-    public string m_name;
     public List<GoogleSheetColumn> _column;
 
-    public GoogleSheetEntry(string _name)
+    public GoogleSheetEntry(string _name) : base(_name)
     {
-        m_name = _name;
         _column = new List<GoogleSheetColumn>();
     }
 }

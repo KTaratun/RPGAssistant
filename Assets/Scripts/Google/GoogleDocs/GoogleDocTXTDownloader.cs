@@ -1,18 +1,17 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public static class CSVDownloader
+public static class GoogleDocTXTDownloader
 {
     internal static IEnumerator DownloadData(string _googleSheetID, System.Action<string> onCompleted)
     {
-        string url = "https://docs.google.com/spreadsheets/d/" + _googleSheetID + "/export?format=csv";
+        string url = "https://docs.google.com/document/d/" + _googleSheetID + "/export?format=txt";
 
         yield return new WaitForEndOfFrame();
 
         string downloadData = null;
-        string lastDownloadedDataString = "LastDataDownloaded";
+        string lastDownloadedDataString = "LastDocDataDownloaded";
 
         using (UnityWebRequest webRequest = UnityWebRequest.Get(url))
         {

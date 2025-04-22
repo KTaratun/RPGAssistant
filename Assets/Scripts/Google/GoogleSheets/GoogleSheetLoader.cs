@@ -3,44 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class GoogleSheetLoader : MonoBehaviour
+public class GoogleSheetLoader : GoogleDataLoader
 {
-    [SerializeField] private string m_googleSheetID;
-    [SerializeField] private GoogleSheetData m_data;
-
     private int progress = 0;
     private bool firstLine = true;
     private List<string> columns;
 
-    private void Awake()
+    protected override void Awake()
     {
-        m_data.m_entryData.Clear();
+        base.Awake();
+
         columns = new List<string>();
     }
 
-    private void Start()
-    {
-        Load();
-    }
-
-    public void Load()
-    {
-        StartCoroutine(CSVDownloader.DownloadData(m_googleSheetID, AfterDownload));
-    }
-
-    public void AfterDownload(string _data)
-    {
-        if (_data == null)
-        {
-            Debug.LogError("Was not able to download data or retrieve old data");
-        }
-        else
-        {
-            StartCoroutine(ProcessData(_data, AfterProcessData));
-        }
-    }
-
-    private IEnumerator ProcessData(string _data, System.Action<string> onCompleted)
+    protected override IEnumerator ProcessData(string _data, System.Action<string> onCompleted)
     {
         yield return null;
         yield return null;
@@ -79,7 +55,7 @@ public class GoogleSheetLoader : MonoBehaviour
                 currEntryContainedQuote = false;
 
                 // Line ended
-                ProcessLineFromCSV(currLineEntries);
+                ProcessLine(currLineEntries);
                 currLineEntries = new List<string>();
 
                 linesSinceUpdate++;
@@ -138,12 +114,12 @@ public class GoogleSheetLoader : MonoBehaviour
         }
 
         currLineEntries.Add(currEntry);
-        ProcessLineFromCSV(currLineEntries);
+        ProcessLine(currLineEntries);
 
         onCompleted(null);
     }
 
-    private void ProcessLineFromCSV(List<string> _currLineElements)
+    protected override void ProcessLine(List<string> _currLineElements)
     {
         if (firstLine)
         {
@@ -168,16 +144,8 @@ public class GoogleSheetLoader : MonoBehaviour
         }
     }
 
-    private void AfterProcessData(string _errorMessage)
+    protected override void AfterProcessData(string _errorMessage)
     {
-
-    }    
-
-    private bool IsAndroid()
-    {
-#if UNITY_IOS
-        return false;
-#endif
-        return true;
+        
     }
 }
