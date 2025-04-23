@@ -16,9 +16,9 @@ public class CharacterManager : ScriptableObject
     {
         Character newCharacter = new Character(m_characterSheetPrefab, _uiBackground);
 
-        for (int i = 0; i < newCharacter.stats.Length; i++)
+        for (int i = 0; i < newCharacter.m_stats.Length; i++)
         {
-            newCharacter.stats[i] = RollAbilityScore();
+            newCharacter.m_stats[i] = RollAbilityScore();
         }
 
         newCharacter.ShowCharacter();

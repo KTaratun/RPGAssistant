@@ -9,32 +9,32 @@ public struct Character
 {
     public enum STATS { STR, DEX, CON, INT, WIS, CHA, TOTAL };
 
-    public string name;
-    public int[] stats;
+    public string m_name;
+    public int[] m_stats;
 
     private CharacterSheet characterSheet;
 
     public Character(CharacterSheet _charSheetPrefab, Transform _uiBackground)
     {
-        name = "newChar";
-        stats = new int[6];
+        m_name = "newChar";
+        m_stats = new int[6];
 
         characterSheet = GameObject.Instantiate(_charSheetPrefab, _uiBackground);
     }
 
     public void ShowCharacter()
     {
-        characterSheet.name.text = name;
+        characterSheet.m_name.text = m_name;
 
-        for (int i = 0; i < stats.Length; i++)
+        for (int i = 0; i < m_stats.Length; i++)
         {
-            characterSheet.stats.text =
-                "STR: " + stats[(int)STATS.STR] + GetStatMod(stats[(int)STATS.STR]) + "\n" +
-                "DEX: " + stats[(int)STATS.DEX] + GetStatMod(stats[(int)STATS.DEX]) + "\n" +
-                "CON: " + stats[(int)STATS.CON] + GetStatMod(stats[(int)STATS.CON]) + "\n" +
-                "INT: " + stats[(int)STATS.INT] + GetStatMod(stats[(int)STATS.INT]) + "\n" +
-                "WIS: " + stats[(int)STATS.WIS] + GetStatMod(stats[(int)STATS.WIS]) + "\n" +
-                "CHA: " + stats[(int)STATS.CHA] + GetStatMod(stats[(int)STATS.CHA]);
+            characterSheet.m_stats.text =
+                "STR: " + m_stats[(int)STATS.STR] + GetStatMod(m_stats[(int)STATS.STR]) + "\n" +
+                "DEX: " + m_stats[(int)STATS.DEX] + GetStatMod(m_stats[(int)STATS.DEX]) + "\n" +
+                "CON: " + m_stats[(int)STATS.CON] + GetStatMod(m_stats[(int)STATS.CON]) + "\n" +
+                "INT: " + m_stats[(int)STATS.INT] + GetStatMod(m_stats[(int)STATS.INT]) + "\n" +
+                "WIS: " + m_stats[(int)STATS.WIS] + GetStatMod(m_stats[(int)STATS.WIS]) + "\n" +
+                "CHA: " + m_stats[(int)STATS.CHA] + GetStatMod(m_stats[(int)STATS.CHA]);
         }
     }
 

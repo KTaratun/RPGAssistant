@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 727bb8ad38538fa4fa0ad4a90aa46675, type: 3}
-  m_Name: RaceData
+  m_Script: {fileID: 11500000, guid: a83c3f8d7c888174583faf124961ca0a, type: 3}
+  m_Name: ClassData
   m_EditorClassIdentifier: 
   m_entryData: []

@@ -16,7 +16,7 @@ public class GoogleData : ScriptableObject
 [Serializable]
 public class GoogleDataEntry
 {
-    public string m_name;
+    [HideInInspector] public string m_name;
 
     public GoogleDataEntry(string _name)
     {

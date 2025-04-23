@@ -6,6 +6,6 @@ using UnityEngine;
 /// </summary>
 public class CharacterSheet : MonoBehaviour
 {
-    public TextMeshProUGUI name;
-    public TextMeshProUGUI stats;
+    public TextMeshProUGUI m_name;
+    public TextMeshProUGUI m_stats;
 }

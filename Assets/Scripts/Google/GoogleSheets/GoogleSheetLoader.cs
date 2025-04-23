@@ -1,26 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
-public class GoogleSheetLoader : GoogleDataLoader
+public class GoogleSheetLoader : GoogleDataLoader<GoogleSheetData>
 {
-    private int progress = 0;
     private bool firstLine = true;
     private List<string> columns;
 
-    protected override void Awake()
+    protected void Awake()
     {
-        base.Awake();
-
         columns = new List<string>();
+
+        m_data.m_entryData.Clear();
+    }
+
+    public override void Load()
+    {
+        StartCoroutine(GoogleSheetCSVDownloader.DownloadData(m_googleID, AfterDownload));
     }
 
     protected override IEnumerator ProcessData(string _data, System.Action<string> onCompleted)
     {
-        yield return null;
-        yield return null;
-        yield return null;
+        base.ProcessData(_data, onCompleted);
 
         // Line level
         bool inQuote = false;
@@ -137,7 +138,7 @@ public class GoogleSheetLoader : GoogleDataLoader
             for (int i = 1; i < _currLineElements.Count; i++)
             {
                 GoogleSheetColumn newColumn = new GoogleSheetColumn(columns[i], _currLineElements[i]);
-                newEntry._column.Add(newColumn);
+                newEntry.m_columns.Add(newColumn);
             }
 
             m_data.m_entryData.Add(newEntry);

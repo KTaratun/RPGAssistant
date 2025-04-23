@@ -2,25 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class GoogleDataLoader : MonoBehaviour
+public abstract class GoogleDataLoader<T> : MonoBehaviour
 {
     [SerializeField] protected string m_googleID;
-    [SerializeField] protected GoogleData m_data;
+    [SerializeField] protected T m_data;
 
-    protected virtual void Awake()
-    {
-        m_data.m_entryData.Clear();
-    }
+    protected int progress = 0;
 
     private void Start()
     {
         Load();
     }
 
-    public void Load()
-    {
-        StartCoroutine(GoogleSheetCSVDownloader.DownloadData(m_googleID, AfterDownload));
-    }
+    public abstract void Load();
 
     public void AfterDownload(string _data)
     {
@@ -34,7 +28,12 @@ public abstract class GoogleDataLoader : MonoBehaviour
         }
     }
 
-    protected abstract IEnumerator ProcessData(string _data, System.Action<string> onCompleted);
+    protected virtual IEnumerator ProcessData(string _data, System.Action<string> onCompleted)
+    {
+        yield return null;
+        yield return null;
+        yield return null;
+    }
 
     protected abstract void ProcessLine(List<string> _currLineElements);
 
