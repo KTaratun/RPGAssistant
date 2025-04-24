@@ -1,10 +1,14 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 
 public class GoogleDocLoader : GoogleDataLoader<GoogleDocData>
 {
-    private List<string> m_tabs;
+    private void Awake()
+    {
+        m_data.m_entryData.Clear();
+    }
 
     public override void Load()
     {
@@ -15,134 +19,55 @@ public class GoogleDocLoader : GoogleDataLoader<GoogleDocData>
     {
         base.ProcessData(_data, onCompleted);
 
-        // Line level
-        bool inQuote = false;
-        int linesSinceUpdate = 0;
-        int kLinesBetweenUpdate = 15;
+        yield return null;
 
-        // Entry Level
-        string currEntry = "";
-        int currCharIndex = 0;
-        bool currEntryContainedQuote = false;
-        List<string> currLineEntries = new List<string>();
+        // Parse symbols
+        char tabSymbol = '⇪';
+        char classSymbol = '⇡';
+        char abilitySymbol = '➠';
 
         char lineEnding = IsAndroid() ? '\r' : '\n';
-        int lineEndingLength = IsAndroid() ? 2 : 1;
 
-        while (currCharIndex < _data.Length)
+        string[] tabs = _data.Split(tabSymbol);
+
+        for (int i = 1; i < tabs.Length; i++)
         {
-            if (!inQuote && (_data[currCharIndex] == lineEnding))
-            {
-                // Skip the line ending
-                currCharIndex += lineEndingLength;
+            string[] classData = tabs[i].Split(classSymbol);
+            GoogleDocEntry newEntry = new GoogleDocEntry(tabs[i].Split(' ')[0]);
 
-                // Wrap up the last entry
-                // If we were in a quote, trim bordering quotation marks
-                if (currEntryContainedQuote)
+            for (int j = 1; j < classData.Length; j++)
+            {
+                // Get name
+                string className = classData[j].Split(':')[1];
+                className = className.Split(lineEnding)[0];
+
+                // Get Abilities
+                List<string> abilities = classData[j].Split(abilitySymbol).ToList();
+                abilities.Remove(abilities[0]);
+
+                for (int k = 0; k < abilities.Count; k++)
                 {
-                    currEntry = currEntry.Substring(1, currEntry.Length - 2);
+                    abilities[k] = abilities[k].Split(lineEnding)[0];
                 }
 
-                currLineEntries.Add(currEntry);
-                currEntry = "";
-                currEntryContainedQuote = false;
-
-                // Line ended
-                ProcessLine(currLineEntries);
-                currLineEntries = new List<string>();
-
-                linesSinceUpdate++;
-                if (linesSinceUpdate > kLinesBetweenUpdate)
-                {
-                    linesSinceUpdate = 0;
-                    yield return null;
-                }
-            }
-            else
-            {
-                if (_data[currCharIndex] == '"')
-                {
-                    inQuote = !inQuote;
-
-                    currEntryContainedQuote = true;
-                }
-
-                // Entry level stuff
-                {
-                    if (_data[currCharIndex] == ',')
-                    {
-                        if (inQuote)
-                        {
-                            currEntry += _data[currCharIndex];
-                        }
-                        else
-                        {
-                            if (currEntryContainedQuote)
-                            {
-                                currEntry = currEntry.Substring(1, currEntry.Length - 2);
-                            }
-
-                            currLineEntries.Add(currEntry);
-                            currEntry = "";
-                            currEntryContainedQuote = false;
-                        }
-                    }
-                    else
-                    {
-                        currEntry += _data[currCharIndex];
-                    }
-                }
-
-                currCharIndex++;
-            }
-
-            progress = (int)((float)currCharIndex / _data.Length * 100.0f);
-        }
+                CharacterClass newClass = new CharacterClass(className, abilities);
 
 
-        // TODO: SHOULDN'T HAVE TO REPEAT THIS!
-        if (currEntryContainedQuote)
-        {
-            currEntry = currEntry.Substring(1, currEntry.Length - 2);
-        }
-
-        currLineEntries.Add(currEntry);
-        ProcessLine(currLineEntries);
-
-        onCompleted(null);
-    }
-
-    protected override void ProcessLine(List<string> _currLineElements)
-    {
-        if (firstLine)
-        {
-            for (int i = 0; i < _currLineElements.Count; i++)
-            {
-                columns.Add(_currLineElements[i]);
-            }
-
-            firstLine = false;
-        }
-        else
-        {
-            GoogleSheetEntry newEntry = new GoogleSheetEntry(_currLineElements[0]);
-
-            for (int i = 1; i < _currLineElements.Count; i++)
-            {
-                GoogleSheetColumn newColumn = new GoogleSheetColumn(columns[i], _currLineElements[i]);
-                newEntry.m_columns.Add(newColumn);
+                newEntry.m_classes.Add(newClass);
             }
 
             m_data.m_entryData.Add(newEntry);
         }
+
+        onCompleted(null);
+    }
+
+    protected override void ProcessLine(List<string> _abilities)
+    {
+
     }
 
     protected override void AfterProcessData(string _errorMessage)
-    {
-        
-    }
-
-    protected override void ProcessLine(List<string> _currLineElements)
     {
         
     }
