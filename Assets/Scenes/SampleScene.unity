@@ -579,6 +579,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_googleID: 1gRQiUaRFlJFy27Co3hI3eWPfNivmbwvYIRCktxXENj0
   m_data: {fileID: 11400000, guid: b07a565f0cda49043ab2cd5dcca09e79, type: 2}
+  m_onDataLoaded: {fileID: 11400000, guid: 369a999b0cedd5446a31e9bd9b825496, type: 2}
 --- !u!114 &805689578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -593,6 +594,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_googleID: 1Qa-bVCgCvkCn-X-12nlU7jZDAqyNNBopLjEJAOZnUTY
   m_data: {fileID: 11400000, guid: 7ea933932d15f0f41a46ac7637ae5a5c, type: 2}
+  m_onDataLoaded: {fileID: 11400000, guid: 400132210513ace47b3da1eceeae5751, type: 2}
 --- !u!114 &805689579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -607,6 +609,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_googleID: 1IQJouE9EHWdZ-7_cSPaDhBFoX7Jrzk8AlB-45Mzcx_g
   m_data: {fileID: 11400000, guid: d9bf0a2db18b90a4aa02f523ff350ba4, type: 2}
+  m_onDataLoaded: {fileID: 11400000, guid: d5e320da725014441b655a6c6d4b5b66, type: 2}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -666,6 +669,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1632452741}
   - component: {fileID: 1632452742}
+  - component: {fileID: 1632452743}
   m_Layer: 5
   m_Name: Character
   m_TagString: Untagged
@@ -705,6 +709,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charManager: {fileID: 11400000, guid: f1a6fb0c01c842f4c935c88a6f54b0ed, type: 2}
+  m_allDataLoadedOn:
+  - {fileID: 11400000, guid: 38f4efaaafa38cf4e98f95be3cc9502b, type: 2}
+--- !u!114 &1632452743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1632452740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 326cb5e7eebfde54190bc0ab1d00993a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_comments: 
+  m_aggregateOn:
+  - m_name: 
+    m_signal: {fileID: 11400000, guid: 369a999b0cedd5446a31e9bd9b825496, type: 2}
+  - m_name: 
+    m_signal: {fileID: 11400000, guid: d5e320da725014441b655a6c6d4b5b66, type: 2}
+  - m_name: 
+    m_signal: {fileID: 11400000, guid: 400132210513ace47b3da1eceeae5751, type: 2}
+  m_onAggregation: {fileID: 11400000, guid: 38f4efaaafa38cf4e98f95be3cc9502b, type: 2}
 --- !u!1 &1972136997
 GameObject:
   m_ObjectHideFlags: 0
