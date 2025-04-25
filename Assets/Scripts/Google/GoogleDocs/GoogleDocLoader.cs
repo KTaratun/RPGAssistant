@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using static Character;
 
 
 public class GoogleDocLoader : GoogleDataLoader<GoogleDocData>
@@ -41,6 +43,15 @@ public class GoogleDocLoader : GoogleDataLoader<GoogleDocData>
                 string className = classData[j].Split(':')[1];
                 className = className.Split(lineEnding)[0];
 
+                // Get Primary Stats
+                string[] primaryStats = classData[j].Split(':')[0].Split('/');
+                List<STATS> stats = new List<STATS>();
+                for (int k = 0; k < primaryStats.Length; k++)
+                {
+                    stats.Add((STATS)Enum.Parse(typeof(STATS), primaryStats[k]));
+
+                }
+
                 // Get Abilities
                 List<string> abilities = classData[j].Split(abilitySymbol).ToList();
                 abilities.Remove(abilities[0]);
@@ -50,7 +61,7 @@ public class GoogleDocLoader : GoogleDataLoader<GoogleDocData>
                     abilities[k] = abilities[k].Split(lineEnding)[0];
                 }
 
-                CharacterClass newClass = new CharacterClass(className, abilities);
+                Class newClass = new Class(className, stats.ToArray(), abilities);
 
 
                 newEntry.m_classes.Add(newClass);
@@ -65,10 +76,5 @@ public class GoogleDocLoader : GoogleDataLoader<GoogleDocData>
     protected override void ProcessLine(List<string> _abilities)
     {
 
-    }
-
-    protected override void AfterProcessData(string _errorMessage)
-    {
-        
     }
 }

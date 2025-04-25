@@ -16,11 +16,11 @@ public class GoogleDocData : ScriptableObject
 [Serializable]
 public class GoogleDocEntry : GoogleDataEntry
 {
-    public List<CharacterClass> m_classes;
+    public List<Class> m_classes;
 
     public GoogleDocEntry(string _name) : base(_name)
     {
-        m_classes = new List<CharacterClass>();
+        m_classes = new List<Class>();
     }
 }
 
@@ -36,16 +36,3 @@ public class GoogleDocEntry : GoogleDataEntry
 //        m_classes = _classes;
 //    }
 //}
-
-[Serializable]
-public struct CharacterClass
-{
-    [HideInInspector] public string m_name;
-    public List<string> m_abilities;
-
-    public CharacterClass(string _name, List<string> _abilities)
-    {
-        m_name = _name;
-        m_abilities = _abilities;
-    }
-}

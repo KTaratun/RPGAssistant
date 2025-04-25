@@ -144,9 +144,4 @@ public class GoogleSheetLoader : GoogleDataLoader<GoogleSheetData>
             m_data.m_entryData.Add(newEntry);
         }
     }
-
-    protected override void AfterProcessData(string _errorMessage)
-    {
-        
-    }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using RelevantLobster.Signals;
 
 /// <summary>
 /// Manages all character related operations.
@@ -9,6 +10,8 @@ using UnityEngine;
 public class CharacterManager : ScriptableObject
 {
     public CharacterSheet m_characterSheetPrefab;
+    public GoogleSheetData m_raceData;
+    public GoogleDocData m_classData;
 
     public List<Character> m_characterList;
 
@@ -20,6 +23,10 @@ public class CharacterManager : ScriptableObject
         {
             newCharacter.m_stats[i] = RollAbilityScore();
         }
+
+        newCharacter.m_race = Race.RollRandomRace(m_raceData);
+
+        newCharacter.m_classes = Class.RollRandomClasses(m_classData, newCharacter);
 
         newCharacter.ShowCharacter();
 

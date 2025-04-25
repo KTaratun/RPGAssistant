@@ -1,3 +1,4 @@
+using RelevantLobster.Signals;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ public abstract class GoogleDataLoader<T> : MonoBehaviour
 {
     [SerializeField] protected string m_googleID;
     [SerializeField] protected T m_data;
+    [SerializeField] private Signal m_onDataLoaded;
 
     protected int progress = 0;
 
@@ -37,7 +39,10 @@ public abstract class GoogleDataLoader<T> : MonoBehaviour
 
     protected abstract void ProcessLine(List<string> _currLineElements);
 
-    protected abstract void AfterProcessData(string _errorMessage);
+    protected virtual void AfterProcessData(string _errorMessage)
+    {
+        m_onDataLoaded.Post();
+    }
 
     protected bool IsAndroid()
     {

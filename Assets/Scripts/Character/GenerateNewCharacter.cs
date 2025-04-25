@@ -1,3 +1,4 @@
+using RelevantLobster.Signals;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -5,9 +6,14 @@ using UnityEngine.Networking;
 public class GenerateNewCharacter : MonoBehaviour
 {
     [SerializeField] private CharacterManager charManager;
+    public Signal[] m_allDataLoadedOn;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Awake()
+    {
+        Signal.Register(m_allDataLoadedOn, AllDataLoad);
+    }
+
+    private void AllDataLoad()
     {
         charManager.RollNewCharacter(transform);
     }

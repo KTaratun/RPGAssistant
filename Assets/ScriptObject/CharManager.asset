@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: CharManager
   m_EditorClassIdentifier: 
   m_characterSheetPrefab: {fileID: 8605041392928361994, guid: 5efdc4fe3b47b0b498c412b515db63fa, type: 3}
+  m_raceData: {fileID: 11400000, guid: 7ea933932d15f0f41a46ac7637ae5a5c, type: 2}
+  m_classData: {fileID: 11400000, guid: b07a565f0cda49043ab2cd5dcca09e79, type: 2}
   m_characterList: []

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -11,6 +12,9 @@ public struct Character
 
     public string m_name;
     public int[] m_stats;
+    public int m_level;
+    public Race m_race;
+    public List<Class> m_classes;
 
     private CharacterSheet characterSheet;
 
@@ -18,6 +22,9 @@ public struct Character
     {
         m_name = "newChar";
         m_stats = new int[6];
+        m_level = 1;
+        m_race = new Race();
+        m_classes = new List<Class>();
 
         characterSheet = GameObject.Instantiate(_charSheetPrefab, _uiBackground);
     }
