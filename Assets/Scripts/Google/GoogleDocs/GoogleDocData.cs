@@ -16,11 +16,11 @@ public class GoogleDocData : ScriptableObject
 [Serializable]
 public class GoogleDocEntry : GoogleDataEntry
 {
-    public List<Class> m_classes;
+    public List<ClassCard> m_classes;
 
     public GoogleDocEntry(string _name) : base(_name)
     {
-        m_classes = new List<Class>();
+        m_classes = new List<ClassCard>();
     }
 }
 

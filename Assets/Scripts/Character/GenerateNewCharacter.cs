@@ -1,7 +1,5 @@
 using RelevantLobster.Signals;
-using System.Collections;
 using UnityEngine;
-using UnityEngine.Networking;
 
 public class GenerateNewCharacter : MonoBehaviour
 {
@@ -15,6 +13,6 @@ public class GenerateNewCharacter : MonoBehaviour
 
     private void AllDataLoad()
     {
-        charManager.RollNewCharacter(transform);
+        charManager.RollNewCharacter();
     }
 }

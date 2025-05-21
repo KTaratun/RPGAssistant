@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-using RelevantLobster.Signals;
 
 /// <summary>
 /// Manages all character related operations.
@@ -9,15 +7,15 @@ using RelevantLobster.Signals;
 [CreateAssetMenu(fileName = "Characters", menuName = "Scriptable Objects/Characters")]
 public class CharacterManager : ScriptableObject
 {
-    public CharacterSheet m_characterSheetPrefab;
     public GoogleSheetData m_raceData;
     public GoogleDocData m_classData;
+    public Transform m_statsTransform;
 
     public List<Character> m_characterList;
 
-    public Character RollNewCharacter(Transform _uiBackground)
+    public Character RollNewCharacter()
     {
-        Character newCharacter = new Character(m_characterSheetPrefab, _uiBackground);
+        Character newCharacter = new Character();
 
         for (int i = 0; i < newCharacter.m_stats.Length; i++)
         {
@@ -26,7 +24,7 @@ public class CharacterManager : ScriptableObject
 
         newCharacter.m_race = Race.RollRandomRace(m_raceData);
 
-        newCharacter.m_classes = Class.RollRandomClasses(m_classData, newCharacter);
+        newCharacter.m_classes = ClassDeck.RollRandomClasses(m_classData, newCharacter);
 
         newCharacter.ShowCharacter();
 
@@ -43,7 +41,7 @@ public class CharacterManager : ScriptableObject
         for (int i = 0; i < numberOfDiceToRoll; i++)
         {
             // Add plus 1 so that our lowest value is 1 and our highest value is the die value rolled
-            int rolledValue = UnityEngine.Random.Range(1, dieToRoll + 1);
+            int rolledValue = Random.Range(1, dieToRoll + 1);
 
             rolledTotal += rolledValue;
 

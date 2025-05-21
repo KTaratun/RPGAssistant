@@ -41,7 +41,7 @@ public class GoogleDocLoader : GoogleDataLoader<GoogleDocData>
             {
                 // Get name
                 string className = classData[j].Split(':')[1];
-                className = className.Split(lineEnding)[0];
+                className = className.Split(lineEnding)[0].Split(" ")[1];
 
                 // Get Primary Stats
                 string[] primaryStats = classData[j].Split(':')[0].Split('/');
@@ -61,7 +61,7 @@ public class GoogleDocLoader : GoogleDataLoader<GoogleDocData>
                     abilities[k] = abilities[k].Split(lineEnding)[0];
                 }
 
-                Class newClass = new Class(className, stats.ToArray(), abilities);
+                ClassCard newClass = new ClassCard(className, stats.ToArray(), abilities);
 
 
                 newEntry.m_classes.Add(newClass);
