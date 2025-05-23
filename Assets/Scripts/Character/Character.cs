@@ -35,7 +35,15 @@ public class Character
         characterSheet.m_name.text = m_name;
         characterSheet.m_quirk.text = m_name;
         characterSheet.m_race.text = m_race.m_name;
-        characterSheet.m_class.text = m_classes.m_crossClasses[0].m_name;
+
+        if (m_classes.m_crossClasses.Count > 0)
+        {
+            characterSheet.m_class.text = m_classes.m_crossClasses[0].m_name;
+        }
+        else
+        {
+            characterSheet.m_class.text = m_classes.m_baseClasses[0].m_name;
+        }
 
         for (int i = 0; i < m_stats.Length; i++)
         {

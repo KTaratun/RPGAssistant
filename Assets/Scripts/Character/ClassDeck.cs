@@ -40,7 +40,7 @@ public class ClassDeck
             proficientStats.Remove(proficientStats[statIndex]);
         }
         
-        while (crossValues.Count < 2)
+        while (crossValues.Count < 2 && positiveStats.Count > 0)
         {
             int statIndex = Random.Range(0, positiveStats.Count);
 
@@ -49,7 +49,10 @@ public class ClassDeck
             positiveStats.Remove(positiveStats[statIndex]);
         }
 
-        classes.m_crossClasses.Add(GetCrossClassWithStats(_classData, crossValues.ToArray()));
+        if (crossValues.Count > 1) 
+        {
+            classes.m_crossClasses.Add(GetCrossClassWithStats(_classData, crossValues.ToArray()));
+        }
 
         return classes;
     }
