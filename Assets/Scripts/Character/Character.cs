@@ -32,10 +32,10 @@ public class Character
 
     public void ShowCharacter()
     {
-        characterSheet.m_name.text = "Name: " + m_name;
+        characterSheet.m_name.text = m_name;
         characterSheet.m_quirk.text = m_name;
-        characterSheet.m_race.text = "Race: " + m_race.m_name;
-        characterSheet.m_class.text = "Class: " + m_classes.m_crossClasses[0].m_name;
+        characterSheet.m_race.text = m_race.m_name;
+        characterSheet.m_class.text = m_classes.m_crossClasses[0].m_name;
 
         for (int i = 0; i < m_stats.Length; i++)
         {
@@ -60,17 +60,19 @@ public class Character
 
     public List<int> GetStatsWithValue(STAT_VALUES _statValue)
     {
-        List<int> positiveStats = new List<int>();
+        List<int> statsWithValue = new List<int>();
         int statValueAsInt = (int)_statValue;
 
         for (int i = 0; i < m_stats.Length; i++)
         {
-            if (m_stats[i] >= statValueAsInt)
+            if (_statValue >= STAT_VALUES.POSITIVE && m_stats[i] >= statValueAsInt ||
+                _statValue == STAT_VALUES.NEUTRAL && m_stats[i] >= 10 && m_stats[i] < 12 ||
+                _statValue <= STAT_VALUES.NEGATIVE && m_stats[i] <= statValueAsInt)
             {
-                positiveStats.Add(i);
+                statsWithValue.Add(i);
             }
         }
 
-        return positiveStats;
+        return statsWithValue;
     }
 }

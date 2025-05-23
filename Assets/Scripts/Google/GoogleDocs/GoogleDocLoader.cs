@@ -41,7 +41,7 @@ public class GoogleDocLoader : GoogleDataLoader<GoogleDocData>
             {
                 // Get name
                 string className = classData[j].Split(':')[1];
-                className = className.Split(lineEnding)[0].Split(" ")[1];
+                className = className.Split(lineEnding)[0].Substring(1);
 
                 // Get Primary Stats
                 string[] primaryStats = classData[j].Split(':')[0].Split('/');
