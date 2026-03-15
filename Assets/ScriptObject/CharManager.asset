@@ -14,5 +14,54 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_raceData: {fileID: 11400000, guid: 7ea933932d15f0f41a46ac7637ae5a5c, type: 2}
   m_classData: {fileID: 11400000, guid: b07a565f0cda49043ab2cd5dcca09e79, type: 2}
-  m_statsTransform: {fileID: 0}
-  m_characterList: []
+  m_characterList:
+  - m_name: newChar
+    m_stats: 0b0000000e000000110000000f0000000d00000007000000
+    m_level: 1
+    m_race:
+      m_name: Dwarf
+      m_description: 
+    m_classes:
+      m_baseClasses:
+      - m_name: Scout
+        m_description: Scouts are all about access and options. They freely move
+          through the battlefield to gain the best vantage points to unleash their
+          barrage of arrows. Their use of special ammo allows them to have a tactical
+          edge in battle.
+        m_primaryStats: 01000000
+        m_abilities:
+        - '(AUG) Ranged Finesse: +1 to attack rolls that are near or far.'
+        - '(BON) Steady Draw: Unhindered by difficult terrain and double the effect
+          of arrows.'
+        - (AUG) Starts each combat with a Feather Arrow.
+      - m_name: Defender
+        m_description: 'Defenders are devoted to their cause and are willing to sacrifice
+          to protect it. Their blood is a currency that is freely paid for their
+          ability to serve their people. '
+        m_primaryStats: 02000000
+        m_abilities:
+        - (AUG) Gain 2 HP instead of 1 on LVL up.
+        - (BON) Use an item. If it's healing, it heals for twice the amount rolled
+          (can't surpass max).
+        - (AUG) Can equip medium armor.
+      - m_name: Adept
+        m_description: Adepts are able to harness the elements through channeling
+          charges from the land. They are master planners always thinking two or
+          more steps ahead in order to cast powerful combinations of spells.
+        m_primaryStats: 03000000
+        m_abilities:
+        - '(BON) Magic Missle [-1]: Deal 1dX2 DMG in near.'
+        - (ACT) Charge [+2].
+        - (AUG) 3 spell crystal slots. (Crystals modify how spells function)
+      m_crossClasses:
+      - m_name: Medic
+        m_description: A trained professional in medicine who can quickly get people
+          back on their feet.
+        m_primaryStats: 0200000003000000
+        m_abilities:
+        - (BON) Stabilize is now a bonus action with DC 8 and the fallen player gains
+          HP equal to your CON mod.
+        - '(FRE) Transfusion: Pay for an INT spell with HP instead of charges (+
+          charges counts as - HP) and roll CON instead, targets hit with the spell
+          gain that much HP instead of being damaged. Cannot heal self.'
+        - Learn a spell.
