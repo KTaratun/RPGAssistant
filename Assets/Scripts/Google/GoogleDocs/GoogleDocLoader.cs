@@ -27,9 +27,9 @@ public class GoogleDocLoader : GoogleDataLoader<GoogleDocData>
         char tabSymbol = '⇪';
         char classSymbol = '⇡';
         char abilitySymbol = '➠';
+        char descriptionSymbol = '➤';
 
         char lineEnding = IsAndroid() ? '\r' : '\n';
-
         string[] tabs = _data.Split(tabSymbol);
 
         for (int i = 1; i < tabs.Length; i++)
@@ -43,7 +43,11 @@ public class GoogleDocLoader : GoogleDataLoader<GoogleDocData>
                 string className = classData[j].Split(':')[1];
                 className = className.Split(lineEnding)[0].Substring(1);
 
-                // Get Primary Stats
+                // Get description
+                string description = classData[j].Split(descriptionSymbol)[1];
+                description = description.Split(lineEnding)[0];
+
+                // Get primary stats
                 string[] primaryStats = classData[j].Split(':')[0].Split('/');
                 List<STATS> stats = new List<STATS>();
                 for (int k = 0; k < primaryStats.Length; k++)
@@ -52,7 +56,7 @@ public class GoogleDocLoader : GoogleDataLoader<GoogleDocData>
 
                 }
 
-                // Get Abilities
+                // Get abilities
                 List<string> abilities = classData[j].Split(abilitySymbol).ToList();
                 abilities.Remove(abilities[0]);
 
@@ -61,7 +65,7 @@ public class GoogleDocLoader : GoogleDataLoader<GoogleDocData>
                     abilities[k] = abilities[k].Split(lineEnding)[0];
                 }
 
-                ClassCard newClass = new ClassCard(className, stats.ToArray(), abilities);
+                ClassCard newClass = new ClassCard(className, description, stats.ToArray(), abilities);
 
 
                 newEntry.m_classes.Add(newClass);
