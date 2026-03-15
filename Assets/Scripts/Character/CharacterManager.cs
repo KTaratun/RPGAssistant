@@ -8,7 +8,7 @@ using UnityEngine;
 public class CharacterManager : ScriptableObject
 {
     public GoogleSheetData m_raceData;
-    public GoogleDocData m_classData;
+    public ClassData m_classData;
     public Transform m_statsTransform;
 
     public List<Character> m_characterList;

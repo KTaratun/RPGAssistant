@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using static Character;
+using static ClassData;
 
 public class ClassDeck
 {
@@ -14,7 +14,7 @@ public class ClassDeck
         m_crossClasses = new List<ClassCard>();
     }
 
-    public static ClassDeck RollRandomClasses(GoogleDocData _classData, Character _character)
+    public static ClassDeck RollRandomClasses(ClassData _classData, Character _character)
     {
         ClassDeck classes = new ClassDeck();
 
@@ -57,18 +57,19 @@ public class ClassDeck
         return classes;
     }
 
-    public static ClassCard GetBaseClassWithStat(GoogleDocData _classData, STATS _stats)
+    public static ClassCard GetBaseClassWithStat(ClassData _classData, STATS _stat)
     {
-        return _classData.m_entryData[0].m_classes[(int)_stats];
+        return _classData.GetClass(CLASS_PARAMETER.BASE, _stat);
     }
 
-    public static ClassCard GetCrossClassWithStats(GoogleDocData _classData, STATS[] _stats)
+    public static ClassCard GetCrossClassWithStats(ClassData _classData, STATS[] _stats)
     {
         if (_stats.Length == 1) // Then we are a base class
         {
-            return _classData.m_entryData[0].m_classes[(int)_stats[0]];
+            return _classData.GetClass(CLASS_PARAMETER.BASE, (int)_stats[0]);
         }
 
-        return _classData.m_entryData[(int)_stats[0] + 1].m_classes[(int)_stats[1]];
+        // We add one to the entryData because that list is offset by BASE
+        return _classData.GetClass(_stats[0] + 1, _stats[1]);
     }
 }
