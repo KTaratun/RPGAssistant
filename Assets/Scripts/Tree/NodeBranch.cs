@@ -13,6 +13,9 @@ public class NodeBranch : MonoBehaviour
 
     public void PopulateNodes(List<ClassCard> classes)
     {
-
+        for (int i = 0; i < m_nodesInStatOrder.Length; i++)
+        {
+            m_nodesInStatOrder[i].PopulateClassData(classes[i]);
+        }
     }
 }

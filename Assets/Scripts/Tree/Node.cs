@@ -1,54 +1,37 @@
-using NUnit.Framework;
-using System.Collections.Generic;
+using System.Xml.Linq;
 using UnityEngine;
+using static Character;
 
 public class Node : MonoBehaviour
 {
-    protected LineRenderer m_lineRenderer;
+    protected string m_name;
 
-    [SerializeField] protected List<Node> m_connectedNodes;
+    protected string m_description;
+
+    protected STATS m_majorStat;
+    protected STATS? m_minorStat;
+
+    protected string[] m_abilities;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        m_lineRenderer = GetComponent<LineRenderer>();
-
-
-        //InitAdjacentNodes();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
 
     }
 
-    protected void InitAdjacentNodes()
+    public void PopulateClassData(ClassCard _class)
     {
-        int numberOfCombinations = 6;
-        float distance = 1;
+        m_name = _class.m_name;
 
-        float spacing = 360 / numberOfCombinations;
+        //m_description = _class
 
-        List<Vector3> nodePositions = new List<Vector3>();
+        m_majorStat = _class.GetMajor();
+        m_minorStat = _class.GetMinor();
 
-        m_connectedNodes = new List<Node>();
-        //for (int i = 0; i < numberOfCombinations; ++i)
-        //{
-        //    m_connectedNodes.Add(newNode);
-        //
-        //    newNode.transform.position += new Vector3(0, distance, 0);
-        //
-        //    transform.Rotate(new Vector3(0, 0, spacing));
-        //}
-
-        for (int i = 0; i < numberOfCombinations; i++)
+        m_abilities = new string[_class.m_abilities.Count];
+        for (int i = 0; i < m_abilities.Length; i++)
         {
-            nodePositions.Add(transform.position);
-            nodePositions.Add(m_connectedNodes[i].transform.position);
+            m_abilities[i] = _class.m_abilities[i];
         }
-
-        m_lineRenderer.positionCount = nodePositions.Count;
-        m_lineRenderer.SetPositions(nodePositions.ToArray());
     }
 }
