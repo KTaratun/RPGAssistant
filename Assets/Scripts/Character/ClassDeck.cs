@@ -1,8 +1,11 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using static Character;
 using static ClassData;
 
+
+[Serializable]
 public class ClassDeck
 {
     public List<ClassCard> m_baseClasses;
@@ -32,7 +35,7 @@ public class ClassDeck
 
         while (crossValues.Count < 2 && proficientStats.Count > 0) 
         {
-            int statIndex = Random.Range(0, proficientStats.Count);
+            int statIndex = UnityEngine.Random.Range(0, proficientStats.Count);
 
             crossValues.Add((STATS)proficientStats[statIndex]);
 
@@ -42,7 +45,7 @@ public class ClassDeck
         
         while (crossValues.Count < 2 && positiveStats.Count > 0)
         {
-            int statIndex = Random.Range(0, positiveStats.Count);
+            int statIndex = UnityEngine.Random.Range(0, positiveStats.Count);
 
             crossValues.Add((STATS)positiveStats[statIndex]);
 

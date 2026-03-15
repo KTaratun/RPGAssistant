@@ -18,21 +18,4 @@ public struct ClassCard
         m_primaryStats = _primaryStats;
         m_abilities = _abilities;
     }
-
-    public STATS GetMajor()
-    {
-        return m_primaryStats[0];
-    }
-
-    public STATS? GetMinor()
-    {
-        if (m_primaryStats.Length > 1)
-        {
-            return m_primaryStats[1];
-        }
-        else
-        {
-            return null;
-        }
-    }
 }

@@ -20,14 +20,14 @@ public class Character
 
     private CharacterSheet characterSheet;
 
-    public Character()
+    public Character(CharacterSheet _charSheet)
     {
         m_name = "newChar";
         m_stats = new int[6];
         m_level = 1;
         m_race = new Race();
 
-        characterSheet = GameObject.Find("CharacterSheet").GetComponent<CharacterSheet>();
+        characterSheet = _charSheet;
     }
 
     public void ShowCharacter()
@@ -82,5 +82,50 @@ public class Character
         }
 
         return statsWithValue;
+    }
+
+    public bool CheckIfHasClass(string _className)
+    {
+        for (int i = 0;i < m_classes.m_baseClasses.Count;i++)
+        {
+            if (m_classes.m_baseClasses[i].m_name == _className)
+            {
+                return true;
+            }    
+        }
+
+        for (int i = 0; i < m_classes.m_crossClasses.Count; i++)
+        {
+            if (m_classes.m_crossClasses[i].m_name == _className)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+    
+    public bool CheckIfIsProficient(STATS[] _majorMinor)
+    {
+        bool isDoubleMajor = false;
+        if (_majorMinor.Length == 2 && _majorMinor[0] == _majorMinor[1])
+        {
+            if (m_stats[(int)_majorMinor[0]] >= (int)STAT_VALUES.PROFICIENT)
+            {
+                return true;
+            }
+        }
+        else
+        {
+            for (int i = 0; i < _majorMinor.Length; i++)
+            {
+                if (m_stats[(int)_majorMinor[i]] >= (int)STAT_VALUES.POSITIVE)
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }

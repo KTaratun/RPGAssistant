@@ -1,6 +1,8 @@
 using RelevantLobster.Variables;
+using System.Collections.Generic;
 using System.Xml.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 using static Character;
 
 public class Node : MonoBehaviour
@@ -14,30 +16,38 @@ public class Node : MonoBehaviour
 
     protected string m_description;
 
-    protected STATS m_majorStat;
-    protected STATS? m_minorStat;
+    protected STATS[] m_majorMinor;
 
     protected string[] m_abilities;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
+    protected Button m_button;
 
+    void Awake()
+    {
+        m_button = GetComponentInChildren<Button>();
     }
 
-    public void PopulateClassData(ClassCard _class)
+    public void PopulateClassData(ClassCard _class, Character _character)
     {
         m_name = _class.m_name;
 
         m_description = _class.m_description;
 
-        m_majorStat = _class.GetMajor();
-        m_minorStat = _class.GetMinor();
+        m_majorMinor = _class.m_primaryStats;
 
         m_abilities = new string[_class.m_abilities.Count];
         for (int i = 0; i < m_abilities.Length; i++)
         {
             m_abilities[i] = _class.m_abilities[i];
+        }
+
+        if (_character.CheckIfHasClass(m_name))
+        {
+            m_button.image.color = Color.cyan;
+        }
+        else if (_character.CheckIfIsProficient(m_majorMinor))
+        {
+            m_button.image.color = Color.yellow;
         }
     }
 
@@ -46,11 +56,11 @@ public class Node : MonoBehaviour
         m_nameVariable.Value = m_name;
         m_descriptionVariable.Value = m_description;
 
-        m_primaryStatsVariable.Value = m_majorStat.ToString();
+        m_primaryStatsVariable.Value = m_majorMinor[0].ToString();
 
-        if (m_minorStat != null)
+        if (m_majorMinor.Length > 1)
         {
-            m_primaryStatsVariable.Value += "/" + m_minorStat.ToString();
+            m_primaryStatsVariable.Value += "/" + m_majorMinor[1].ToString();
         }
 
         m_abilitiesVariable.Value = "";

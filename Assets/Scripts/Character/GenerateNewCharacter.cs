@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class GenerateNewCharacter : MonoBehaviour
 {
-    [SerializeField] private CharacterManager charManager;
+    [SerializeField] private CharacterManager m_charManager;
+    [SerializeField] private CharacterSheet m_charSheet;
     public Signal[] m_allDataLoadedOn;
 
     private void Awake()
@@ -13,6 +14,8 @@ public class GenerateNewCharacter : MonoBehaviour
 
     private void AllDataLoad()
     {
-        charManager.RollNewCharacter();
+        m_charManager.ClearCharacterData();
+
+        m_charManager.RollNewCharacter(m_charSheet);
     }
 }

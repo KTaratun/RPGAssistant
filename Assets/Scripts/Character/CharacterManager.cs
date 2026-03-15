@@ -9,13 +9,12 @@ public class CharacterManager : ScriptableObject
 {
     public GoogleSheetData m_raceData;
     public ClassData m_classData;
-    public Transform m_statsTransform;
 
     public List<Character> m_characterList;
 
-    public Character RollNewCharacter()
+    public Character RollNewCharacter(CharacterSheet _charSheet)
     {
-        Character newCharacter = new Character();
+        Character newCharacter = new Character(_charSheet);
 
         for (int i = 0; i < newCharacter.m_stats.Length; i++)
         {
@@ -27,6 +26,8 @@ public class CharacterManager : ScriptableObject
         newCharacter.m_classes = ClassDeck.RollRandomClasses(m_classData, newCharacter);
 
         newCharacter.ShowCharacter();
+
+        m_characterList.Add(newCharacter);
 
         return newCharacter;
     }
@@ -54,5 +55,10 @@ public class CharacterManager : ScriptableObject
         rolledTotal -= lowestRoll;
 
         return rolledTotal;
+    }
+
+    public void ClearCharacterData()
+    {
+        m_characterList.Clear();
     }
 }

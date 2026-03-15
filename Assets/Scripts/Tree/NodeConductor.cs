@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class NodeConductor : MonoBehaviour
 {
-    [SerializeField] protected ClassData m_classData;
+    [SerializeField] protected CharacterManager m_charManager;
 
     protected NodeBranch[] m_branches;
 
@@ -10,14 +10,15 @@ public class NodeConductor : MonoBehaviour
     void Start()
     {
         m_branches = GetComponentsInChildren<NodeBranch>();
+
+        PopulateBranches();
     }
 
-    // Update is called once per frame
-    void Update()
+    protected void PopulateBranches()
     {
-        for (int i = 0; i < m_classData.GetNumberOfBranches(); i++)
+        for (int i = 0; i < m_branches.Length; i++)
         {
-            m_branches[i].PopulateNodes(m_classData.GetBranchAtIndex(i));
+            m_branches[i].PopulateNodes(m_charManager.m_classData.GetBranchAtIndex(i), m_charManager.m_characterList[0]);
         }
     }
 }
