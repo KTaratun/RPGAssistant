@@ -305,15 +305,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1547225556257847098, guid: 86aa04aa51b68ea44a4adf3949adac38, type: 3}
       propertyPath: m_text
-      value: 'DEX
-
-        10'
+      value: DEX
       objectReference: {fileID: 0}
     - target: {fileID: 2036690840895628806, guid: 86aa04aa51b68ea44a4adf3949adac38, type: 3}
       propertyPath: m_text
-      value: 'STR
-
-        10'
+      value: STR
       objectReference: {fileID: 0}
     - target: {fileID: 2533584732941002264, guid: 86aa04aa51b68ea44a4adf3949adac38, type: 3}
       propertyPath: m_Name
@@ -333,15 +329,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5506820038366080446, guid: 86aa04aa51b68ea44a4adf3949adac38, type: 3}
       propertyPath: m_text
-      value: 'CON
-
-        10'
+      value: CON
       objectReference: {fileID: 0}
     - target: {fileID: 5813892262884406759, guid: 86aa04aa51b68ea44a4adf3949adac38, type: 3}
       propertyPath: m_text
-      value: 'WIS
-
-        10'
+      value: WIS
       objectReference: {fileID: 0}
     - target: {fileID: 6205091534437301926, guid: 86aa04aa51b68ea44a4adf3949adac38, type: 3}
       propertyPath: m_Name
@@ -353,10 +345,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7426009893975208324, guid: 86aa04aa51b68ea44a4adf3949adac38, type: 3}
       propertyPath: m_text
-      value: 'INT
-
-        10'
+      value: INT
       objectReference: {fileID: 0}
+    - target: {fileID: 7988290884871768398, guid: 86aa04aa51b68ea44a4adf3949adac38, type: 3}
+      propertyPath: 'm_nodesInStatOrder.Array.data[3]'
+      value: 
+      objectReference: {fileID: 33539750}
+    - target: {fileID: 7988290884871768398, guid: 86aa04aa51b68ea44a4adf3949adac38, type: 3}
+      propertyPath: 'm_nodesInStatOrder.Array.data[4]'
+      value: 
+      objectReference: {fileID: 33539749}
     - target: {fileID: 8054061584583030265, guid: 86aa04aa51b68ea44a4adf3949adac38, type: 3}
       propertyPath: m_Name
       value: WIS
@@ -371,9 +369,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8563885252509231127, guid: 86aa04aa51b68ea44a4adf3949adac38, type: 3}
       propertyPath: m_text
-      value: 'CHA
-
-        10'
+      value: CHA
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7032556738968024066, guid: 86aa04aa51b68ea44a4adf3949adac38, type: 3}
@@ -399,6 +395,28 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 86aa04aa51b68ea44a4adf3949adac38, type: 3}
+--- !u!114 &33539749 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3043315635729049940, guid: 86aa04aa51b68ea44a4adf3949adac38, type: 3}
+  m_PrefabInstance: {fileID: 33539748}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b22363b6d93204341b6c9f110d23cd89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &33539750 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2133971614725172535, guid: 86aa04aa51b68ea44a4adf3949adac38, type: 3}
+  m_PrefabInstance: {fileID: 33539748}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b22363b6d93204341b6c9f110d23cd89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &262846121
 PrefabInstance:
   m_ObjectHideFlags: 0

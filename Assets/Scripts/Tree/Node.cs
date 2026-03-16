@@ -1,6 +1,8 @@
 using RelevantLobster.Variables;
+using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using static Character;
@@ -22,12 +24,15 @@ public class Node : MonoBehaviour
 
     protected Button m_button;
 
+    protected TextMeshPro m_text;
+
     void Awake()
     {
         m_button = GetComponentInChildren<Button>();
+        m_text = GetComponentInChildren<TextMeshPro>();
     }
 
-    public void PopulateClassData(ClassCard _class, Character _character)
+    public void PopulateClassData(ClassCard _class, Character _character, bool _isRoot)
     {
         m_name = _class.m_name;
 
@@ -48,6 +53,12 @@ public class Node : MonoBehaviour
         else if (_character.CheckIfIsProficient(m_majorMinor))
         {
             m_button.image.color = Color.yellow;
+        }
+
+        if (_isRoot)
+        {
+            int statIndexFromText = (int)Enum.Parse(typeof(STATS), m_text.text);
+            m_text.text += "\n" + _character.m_stats[statIndexFromText].ToString();
         }
     }
 

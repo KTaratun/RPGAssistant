@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class NodeBranch : MonoBehaviour
 {
+    [SerializeField] protected bool m_isRoot;
+
     [SerializeField] Node[] m_nodesInStatOrder;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -15,7 +17,7 @@ public class NodeBranch : MonoBehaviour
     {
         for (int i = 0; i < m_nodesInStatOrder.Length; i++)
         {
-            m_nodesInStatOrder[i].PopulateClassData(_classes[i], _character);
+            m_nodesInStatOrder[i].PopulateClassData(_classes[i], _character, m_isRoot);
         }
     }
 }
