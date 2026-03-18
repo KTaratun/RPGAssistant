@@ -16,10 +16,10 @@ MonoBehaviour:
   m_classData: {fileID: 11400000, guid: b07a565f0cda49043ab2cd5dcca09e79, type: 2}
   m_characterList:
   - m_name: newChar
-    m_stats: 0b0000000e000000110000000f0000000d00000007000000
+    m_stats: 0c000000110000000b0000000a0000000a0000000a000000
     m_level: 1
     m_race:
-      m_name: Dwarf
+      m_name: Human
       m_description: 
     m_classes:
       m_baseClasses:
@@ -34,34 +34,13 @@ MonoBehaviour:
         - '(BON) Steady Draw: Unhindered by difficult terrain and double the effect
           of arrows.'
         - (AUG) Starts each combat with a Feather Arrow.
-      - m_name: Defender
-        m_description: 'Defenders are devoted to their cause and are willing to sacrifice
-          to protect it. Their blood is a currency that is freely paid for their
-          ability to serve their people. '
-        m_primaryStats: 02000000
-        m_abilities:
-        - (AUG) Gain 2 HP instead of 1 on LVL up.
-        - (BON) Use an item. If it's healing, it heals for twice the amount rolled
-          (can't surpass max).
-        - (AUG) Can equip medium armor.
-      - m_name: Adept
-        m_description: Adepts are able to harness the elements through channeling
-          charges from the land. They are master planners always thinking two or
-          more steps ahead in order to cast powerful combinations of spells.
-        m_primaryStats: 03000000
-        m_abilities:
-        - '(BON) Magic Missle [-1]: Deal 1dX2 DMG in near.'
-        - (ACT) Charge [+2].
-        - (AUG) 3 spell crystal slots. (Crystals modify how spells function)
       m_crossClasses:
-      - m_name: Medic
-        m_description: A trained professional in medicine who can quickly get people
-          back on their feet.
-        m_primaryStats: 0200000003000000
+      - m_name: Thief
+        m_description: A master of deceit and misdirection.
+        m_primaryStats: 0100000005000000
         m_abilities:
-        - (BON) Stabilize is now a bonus action with DC 8 and the fallen player gains
-          HP equal to your CON mod.
-        - '(FRE) Transfusion: Pay for an INT spell with HP instead of charges (+
-          charges counts as - HP) and roll CON instead, targets hit with the spell
-          gain that much HP instead of being damaged. Cannot heal self.'
-        - Learn a spell.
+        - (BON) Equip a weapon you've disarmed.
+        - '(BON/ACT) One Up: Use a BON or ACT that another player used on their last
+          turn. They can''t use that action for 1 turn. CHA DC 12.'
+        - (AUG) Starts each combat with a Scatter Arrow.
+        - +2 bonus to stealing checks

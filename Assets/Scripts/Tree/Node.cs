@@ -9,6 +9,7 @@ using static Character;
 
 public class Node : MonoBehaviour
 {
+    [SerializeField] protected STATS m_stat;
     [SerializeField] protected StringVariable m_nameVariable;
     [SerializeField] protected StringVariable m_descriptionVariable;
     [SerializeField] protected StringVariable m_primaryStatsVariable;
@@ -35,30 +36,39 @@ public class Node : MonoBehaviour
     public void PopulateClassData(ClassCard _class, Character _character, bool _isRoot)
     {
         m_name = _class.m_name;
-
+        
         m_description = _class.m_description;
-
+        
         m_majorMinor = _class.m_primaryStats;
-
+        
         m_abilities = new string[_class.m_abilities.Count];
         for (int i = 0; i < m_abilities.Length; i++)
         {
             m_abilities[i] = _class.m_abilities[i];
         }
 
-        if (_character.CheckIfHasClass(m_name))
+        if (!_isRoot && _character.CheckIfHasClass(m_name))
         {
             m_button.image.color = Color.cyan;
         }
-        else if (_character.CheckIfIsProficient(m_majorMinor))
+        else if (_character.CheckIfHasClass(m_name) && m_majorMinor.Length == 2 
+            && m_majorMinor[0] == m_majorMinor[1])
         {
-            m_button.image.color = Color.yellow;
+            m_button.image.color += new Color(.3f, .3f, .3f, 0);
         }
+        else if (!_character.CheckIfIsUnlockable(m_majorMinor))
+        {
+            m_button.image.color = Color.gray;
+        }
+        //else if (!_isRoot && _character.CheckIfIsUnlockable(m_majorMinor))
+        //{
+        //    m_button.image.color = new Color(.8f, .8f, .8f);
+        //}
 
         if (_isRoot)
         {
-            int statIndexFromText = (int)Enum.Parse(typeof(STATS), m_text.text);
-            m_text.text += "\n" + _character.m_stats[statIndexFromText].ToString();
+            int statIndexFromText = (int)Enum.Parse(typeof(STATS), m_stat.ToString());
+            m_text.text = _character.m_stats[statIndexFromText].ToString();
         }
     }
 

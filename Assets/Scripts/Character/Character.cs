@@ -105,7 +105,7 @@ public class Character
         return false;
     }
     
-    public bool CheckIfIsProficient(STATS[] _majorMinor)
+    public bool CheckIfIsUnlockable(STATS[] _majorMinor)
     {
         bool isDoubleMajor = false;
         if (_majorMinor.Length == 2 && _majorMinor[0] == _majorMinor[1])
@@ -114,18 +114,32 @@ public class Character
             {
                 return true;
             }
+            // if (m_stats[(int)_majorMinor[0]] < (int)STAT_VALUES.POSITIVE)
+            // {
+            //     return false;
+            // }
         }
         else
         {
+
+            // for (int i = 0; i < _majorMinor.Length; i++)
+            // {
+            //     if (m_stats[(int)_majorMinor[i]] < (int)STAT_VALUES.POSITIVE)
+            //     {
+            //         return false;
+            //     }
+            // }
+
             for (int i = 0; i < _majorMinor.Length; i++)
             {
-                if (m_stats[(int)_majorMinor[i]] >= (int)STAT_VALUES.POSITIVE)
-                {
-                    return true;
-                }
+               if (m_stats[(int)_majorMinor[i]] >= (int)STAT_VALUES.POSITIVE)
+               {
+                   return true;
+               }
             }
         }
 
+        //return true;
         return false;
     }
 }

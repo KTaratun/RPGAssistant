@@ -1,3 +1,5 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class NodeConductor : MonoBehaviour
@@ -16,9 +18,14 @@ public class NodeConductor : MonoBehaviour
 
     protected void PopulateBranches()
     {
+        Character firstCharacter = m_charManager.m_characterList[0];
+
         for (int i = 0; i < m_branches.Length; i++)
         {
-            m_branches[i].PopulateNodes(m_charManager.m_classData.GetBranchAtIndex(i), m_charManager.m_characterList[0]);
+            ClassCard baseClass = m_charManager.m_classData.GetBranchAtIndex(0)[i];
+            List<ClassCard> crossClasses = m_charManager.m_classData.GetBranchAtIndex(i + 1);
+
+            m_branches[i].PopulateNodes(baseClass, crossClasses, firstCharacter);
         }
     }
 }
